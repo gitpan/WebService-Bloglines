@@ -1,5 +1,10 @@
 Revision history for Perl extension WebService::Bloglines
 
+0.03  Wed Jan 12 18:25:07 JST 2005
+	* $bloglines->getitems() returns array of Entries in a list
+ 	  context. It allows you to fetch all unread items in a single
+	  getitems(0) call.
+
 0.02  Thu Sep 30 19:54:36 JST 2004
 	- Added XML::RSS to PREREQ_PM
 	- Encode module is now optional for Perl < 5.8

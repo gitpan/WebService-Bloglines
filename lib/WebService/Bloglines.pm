@@ -2,7 +2,7 @@ package WebService::Bloglines;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.02;
+$VERSION = 0.03;
 
 use LWP::UserAgent;
 use URI;
@@ -84,7 +84,7 @@ sub getitems {
 	$self->_die($res->status_line);
     }
 
-    return WebService::Bloglines::Entries->new($res->content);
+    return WebService::Bloglines::Entries->parse($res->content);
 }
 
 1;
@@ -154,6 +154,15 @@ WebService::Bloglines - Easy-to-use Interface for Bloglines Web Services
       my $description = $item->{description};
       my $pubDate     = $item->{pubDate}; # "Mon, 27 Sep 2004 8:04:17 GMT"
       my $itemid      = $item->{bloglines}->{itemid};
+  }
+
+  # get all unread items in a single call
+  my @updates = $bloglines->getitems(0);
+  for my $update (@updates) {
+      my $feed = $update->feed();
+      for my $item ($update->items) {
+          ...
+      }
   }
 
 =head1 DESCRIPTION
