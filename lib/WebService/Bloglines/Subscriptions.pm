@@ -1,7 +1,7 @@
 package WebService::Bloglines::Subscriptions;
 
 use vars qw($VERSION);
-$VERSION = 0.02;
+$VERSION = 0.06;
 
 use strict;
 use HTML::Entities;
@@ -35,7 +35,7 @@ sub _parse_xml {
 	    my $attr = $self->_parse_attr($1);
 	    $attr->{folderId} = $current_folderid;
 	    push @{$self->{_feeds}}, $attr;
-	    $current_folder_unread += $attr->{BloglinesUnread};
+	    $attr->{folderId} and $current_folder_unread += $attr->{BloglinesUnread};
 	} elsif (m!<outline (.*?)>$!) {
 	    my $attr = $self->_parse_attr($1);
 	    next unless $attr->{BloglinesSubId};

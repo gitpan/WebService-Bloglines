@@ -1,5 +1,10 @@
 Revision history for Perl extension WebService::Bloglines
 
+0.06  Fri Feb 18 01:40:17 JST 2005
+	- Fixed bugs in BloglinesUnread that first non-root folders
+	  unread count is not correct
+	  (Thanks to Gosuke Miyashita)
+
 0.05  Tue Feb 15 23:08:23 JST 2005
 	- Added BloglinesUnread in each folder of Subscriptions
 	  (Thanks to Gosuke Miyashita)
