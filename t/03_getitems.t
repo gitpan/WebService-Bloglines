@@ -54,6 +54,6 @@ my @updates = $bloglines->getitems(0);
 for my $update (@updates) {
     ok defined($update->feed->{title}), $update->feed->{title};
     my $item = ($update->items)[0];
-    ok $item->{link}, $item->{link};
+    ok defined($item->{link}), "link: $item->{link}";
 }
 

@@ -49,7 +49,7 @@ sub feed {
 
 sub items {
     my $self = shift;
-    return @{$self->{_rss}->{items}};
+    return wantarray ? @{$self->{_rss}->{items}} : $self->{_rss}->{items};
 }
 
 1;
