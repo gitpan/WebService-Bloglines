@@ -1,11 +1,15 @@
 package WebService::Bloglines::Subscriptions;
 
 use vars qw($VERSION);
-$VERSION = 0.01;
+$VERSION = 0.02;
 
 use strict;
-use Encode;
 use HTML::Entities;
+
+use vars qw($HaveEncode);
+BEGIN {
+    eval { require Encode; $HaveEncode = 1 };
+}
 
 sub new {
     my($class, $xml) = @_;
@@ -47,7 +51,8 @@ sub _parse_attr {
     my($self, $attrline) = @_;
     my %attr;
     while ($attrline =~ s/\s*(\w+)="([^\"]*)"//) {
-	$attr{$1} = Encode::decode("utf-8", HTML::Entities::decode($2));
+	my $value = HTML::Entities::decode($2);
+	$attr{$1} = $HaveEncode ? Encode::decode("utf-8", $value) : $value;
     }
     return \%attr;
 }

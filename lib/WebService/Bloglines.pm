@@ -2,7 +2,7 @@ package WebService::Bloglines;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.01';
+$VERSION = 0.02;
 
 use LWP::UserAgent;
 use URI;
@@ -16,7 +16,7 @@ sub new {
     $ua->agent("WebService::Bloglines/$VERSION");
     $ua->credentials("rpc.bloglines.com:80", "Bloglines RPC",
 		     $p{username}, $p{password});
-    bless { %p, ua => $ua}, $class;
+    bless { %p, ua => $ua }, $class;
 }
 
 sub _die {
@@ -172,7 +172,7 @@ TBD.
 
 =item *
 
-Cacheability using Cache::Cache API.
+Cleaner API to make users free from the difference between OPML and RSS stuff
 
 =item *
 
