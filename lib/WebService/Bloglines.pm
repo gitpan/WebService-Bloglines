@@ -2,7 +2,7 @@ package WebService::Bloglines;
 
 use strict;
 use 5.8.1;
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 use LWP::UserAgent;
 use URI;
@@ -13,13 +13,14 @@ use WebService::Bloglines::Subscriptions;
 sub new {
     my($class, %p) = @_;
     my $ua  = LWP::UserAgent->new();
+    $ua->env_proxy;
     $ua->agent("WebService::Bloglines/$VERSION");
     $ua->credentials("rpc.bloglines.com:80", "Bloglines RPC",
 		     $p{username}, $p{password});
     bless { %p, ua => $ua }, $class;
 }
 
-sub username    { shift_var('username', @_) }
+sub username    { shift->_var('username', @_) }
 sub password    { shift->_var('password', @_) }
 sub use_liberal { shift->_var('use_liberal', @_) }
 
